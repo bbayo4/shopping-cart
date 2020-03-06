@@ -25,6 +25,7 @@
             type="button"
             name=""
             class="btn btn--small"
+            @click="saveForLater"
           >
             Save for later
           </button>
@@ -33,6 +34,7 @@
             type="button"
             name=""
             class="btn btn--small"
+            @click="remove"
           >
             Remove
           </button>
@@ -161,7 +163,23 @@ export default {
     Emits an event to decrease the item quantity by 1
     */
     decrementQuantity() {
-      this.$emit('decrement-quantity', this.id);
+      this.$emit('decrement-quantity', this.item.id);
+    },
+
+    /*
+    Called when the save for later (#save-for-later-btn) is clicked
+    Emits an event to move the item from the cart saved items
+    */
+    saveForLater() {
+      this.$emit('save-for-later', this.item.id);
+    },
+
+    /*
+    Called when the remove (#remove-btn) is clicked
+    Emits an event to remove the item from the cart
+    */
+    remove() {
+      this.$emit('remove', this.item.id);
     },
   },
 };

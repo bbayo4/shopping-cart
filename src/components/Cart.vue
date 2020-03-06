@@ -4,10 +4,10 @@
     <section class="overview">
       <div class="overview--items">
         <h2>Shopping Cart</h2>
-        <span id="cart-item-count">{{ itemsAmount }} items</span>
+        <span id="cart-item-count">{{ itemsAmount }} {{ 'item' | pluralize(itemsAmount) }}</span>
       </div>
       <div class="overview--subtotal">
-        <h2>${{ data.subtotal }}</h2>
+        <h2>${{ getSubtotal }}</h2>
         <span>Subtotal</span>
       </div>
       <div class="overview--buttons">
@@ -86,7 +86,7 @@
         </div>
         <div class="summary__subtotal">
           <h6>Subtotal</h6>
-          <h6>${{ data.subtotal }}</h6>
+          <h6>${{ getSubtotal }}</h6>
         </div>
         <button
           type="button"
@@ -97,6 +97,39 @@
         </button>
       </div>
     </section>
+
+    <!-- REI Mastercard -->
+    <section class="mastercard">
+       <div class="mastercard__img">
+          <img
+          src="../assets/mastercard.png"
+          alt="REI Co-op Mastercard"
+        >
+      </div>
+      <div class="mastercard__notices">
+        <span class="mastercard__notice">
+          <strong> Apply for the REI Co-op Mastercard and you could be instantly approved and earn a $100 REI gift card</strong>
+        </span>
+        <span class="mastercard__notice">
+          Upon approval, you'll also get 5% back on the purchase. Plus, you'll get 1% back everywhere else you use your card.<a href="#"> Learn more & apply now</a>
+        </span>
+      </div>
+    </section>
+
+    <!-- save for later items -->
+    <section class="save-for-later">
+      <div v-if="data.savedItems.length">
+        <h6>Saved for later</h6>
+        <SavedItem
+          v-for="item in data.savedItems"
+          :key="item.id"
+          :item="item"
+          @move-to-cart="moveToCart"
+          @remove-from-saved="removeFromSaved"
+        />
+      </div>
+    </section>
+
   </main>
 </template>
 
@@ -116,9 +149,12 @@ export default {
       data: mockData,
     };
   },
+  filters: {
+    pluralize: (word, amount) => (amount > 1 || amount > 1) ? `${word}s` : word
+  },
   computed: {
     /*
-    Returns the total amount of items in the cart.
+    Returns the total amount (counts) of items in the cart.
     */
     itemsAmount() {
       const quantities = this.data.items.map(item => item.quantity);
@@ -127,6 +163,22 @@ export default {
         total = quantities.reduce((a, b) => a + b);
       }
       return total;
+    },
+    /*
+    Returns the subtotal amount ($) of items in the cart.
+    */
+    getSubtotal() {
+      return this.data.items.reduce(
+        (a, b) => a + b.price * b.quantity,0
+      ).toFixed(2);
+    },
+
+    /*
+    Provides the image path for the product image
+    */
+    productImage() {
+      // return import `@/assets/${this.item.img}`;
+      return require(`@/assets/${this.item.img}`);
     },
   },
   methods: {
@@ -144,6 +196,9 @@ export default {
     decrementQuantity(cartItemId) {
       const itemToDecrement = this.data.items.find(cartItem => cartItem.id === cartItemId);
       itemToDecrement.quantity -= 1;
+      if(itemToDecrement.quantity === 0){
+        this.remove(cartItemId);
+      }
     },
 
     /*

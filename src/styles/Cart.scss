@@ -142,6 +142,63 @@
   }
 }
 
+/* REI Mastercard section */
+.mastercard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: $section-padding;
+  border-top: 1px solid $light-grey;
+  @media screen {
+    @media (min-width: $breakpoint-md) {
+      flex-wrap: nowrap;
+    }
+  }
+
+  &__notices {
+    width: 100%;
+    padding: 15px;
+    @media screen {
+      @media (min-width: $breakpoint-md) {
+        width: 70%;
+      }
+    }
+  }
+
+  &__notice {
+    display: block;
+
+    &:not(:last-child) {
+      padding-bottom: 18px;
+      font-size: 18px;
+    }
+    &:last-child {
+      font-size: 15px;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    img{
+      max-width: 100%;
+      padding: 30px;
+    }
+    @media screen {
+      @media (min-width: $breakpoint-md) {
+        width: 30%;
+        
+      }
+    }
+  }
+}
+
+/* Save for later section */
+.save-for-later{
+  border-top: 1px solid $light-grey;
+  padding-top: 30px;
+}
 /* Empty cart section */
 .cart__empty {
   padding: $section-padding-double;
