@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { shallowMount } from '@vue/test-utils';
-import mockData from '../../mockData.json';
-import Cart from '@/components/Cart.vue';
 import CartItem from '@/components/CartItem.vue';
+import Cart from '@/components/Cart.vue';
+import mockData from '../../mockData.json';
 
 const data = {
   subtotal: mockData.subtotal,
