@@ -1,6 +1,3 @@
-# fed-interview-exercise
-
-REI is building a new shopping cart, and you're in charge of implementing it.
 
 ## What's provided
 
@@ -19,7 +16,7 @@ You will find mock data for this project in the root directory, in 'mockData.jso
 
 This is the set of core features that we expect to see implemented in a finished exercise.
 
-1. Build the 'REI Mastercard' section (within the green outlined part of the mockup).
+1. Build the ' Mastercard' section (within the green outlined part of the mockup).
 2. Build the 'Saved for later' section (also within the green outlined part on the mockup).
   * This section should render out a SavedItem component for each saved item.
   * If you wire up the data, there should be one saved item in the section.
