@@ -49,13 +49,3 @@ To open the project:
 
 To run the tests:
 `npm run test`.
-
-## Things to keep in mind
-
-* Commit directly to this repository.
-* We use the airbnb linter as our code style guidelines.
-* Outside of the core expectations, you have the ability to choose what you implement.
-* Browser testing is not part of the core expectations.
-* Budget about 4-6 hours for the exercise.
-* Please do not share this exercise with anyone but us.
-* Have fun!
